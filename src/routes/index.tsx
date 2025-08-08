@@ -27,6 +27,15 @@ import {
   useTransform,
 } from "motion/react";
 import { fadeUp, stagger } from "@/helpers/motion.ts";
+import {
+  BrainCircuitIcon,
+  BrickWall,
+  FolderLock,
+  Link as LinkIcon,
+  MousePointer,
+  Search,
+} from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle.tsx";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -125,6 +134,7 @@ export default function Index() {
             >
               Entrar
             </a>
+            <ThemeToggle />
             <Button className="px-5">Criar conta</Button>
           </div>
         </div>
@@ -291,26 +301,32 @@ export default function Index() {
         >
           {[
             {
+              icon: BrainCircuitIcon,
               title: "Tags por IA",
               desc: "Analisamos título e descrição para sugerir tags automaticamente.",
             },
             {
+              icon: FolderLock,
               title: "Pastas privadas",
               desc: "Tudo começa privado. Torne público apenas o que você quiser.",
             },
             {
+              icon: LinkIcon,
               title: "Compartilhar com link",
               desc: "Crie um link só de leitura e revogue quando precisar.",
             },
             {
+              icon: Search,
               title: "Busca rápida",
               desc: "Encontre por título, descrição ou tag instantaneamente.",
             },
             {
+              icon: MousePointer,
               title: "Desempenho",
               desc: "Interações fluídas, UI responsiva e feedback imediato.",
             },
             {
+              icon: BrickWall,
               title: "Segurança",
               desc: "Criptografia em repouso e TLS em trânsito.",
             },
@@ -322,7 +338,9 @@ export default function Index() {
             >
               <Card className="shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
-                  <div className="mb-3 size-10 rounded-lg bg-primary/15" />
+                  <div className="mb-4 inline-flex rounded-md bg-primary/10 p-3 text-primary">
+                    <f.icon className="size-6" />
+                  </div>
                   <CardTitle className="text-lg">{f.title}</CardTitle>
                   <CardDescription className="mt-1.5">{f.desc}</CardDescription>
                 </CardContent>

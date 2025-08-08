@@ -183,3 +183,22 @@
     * { @apply border-border outline-ring/50; }
     body { @apply bg-background text-foreground; }
 }
+
+.theme-transition * {
+    transition:
+            color 280ms ease,
+            background-color 280ms ease,
+            border-color 280ms ease,
+            outline-color 280ms ease,
+            fill 280ms ease,
+            stroke 280ms ease,
+            box-shadow 280ms ease;
+}
+
+/* respeita prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .theme-transition * {
+        transition: none !important;
+    }
+}
+
