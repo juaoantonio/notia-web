@@ -19,7 +19,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Separator } from "@/components/ui/separator";
 import {
   motion,
   useReducedMotion,
@@ -67,7 +66,7 @@ function SectionBadge({ children }: { children: ReactNode }) {
   );
 }
 
-export default function Index() {
+function Index() {
   // Mini demo: rotaciona sugestões de tags
   const tagSets = [
     ["#javascript", "#typescript", "#webdev"],
@@ -270,13 +269,6 @@ export default function Index() {
           <span className="text-xs text-muted-foreground">
             Confiado por estudantes, concurseiros e professores
           </span>
-          <div className="flex items-center gap-6 opacity-70">
-            <Separator orientation="vertical" className="h-6" />
-            <div className="h-6 w-20 rounded bg-foreground/10" />
-            <div className="h-6 w-20 rounded bg-foreground/10" />
-            <div className="h-6 w-20 rounded bg-foreground/10" />
-            <Separator orientation="vertical" className="h-6" />
-          </div>
         </div>
       </section>
 
