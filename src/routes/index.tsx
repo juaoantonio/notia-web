@@ -20,6 +20,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
+  AnimatePresence,
   motion,
   useReducedMotion,
   useScroll,
@@ -65,6 +66,18 @@ function SectionBadge({ children }: { children: ReactNode }) {
     </Badge>
   );
 }
+
+const tagsList = {
+  initial: {},
+  animate: { transition: { staggerChildren: 0.06 } },
+  exit: { transition: { staggerChildren: 0.04, staggerDirection: -1 } },
+};
+
+const tagItem = {
+  initial: { opacity: 0, y: -12, scale: 0.98 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  exit: { opacity: 0, y: 12, scale: 0.98 },
+};
 
 function Index() {
   // Mini demo: rotaciona sugestões de tags
@@ -243,13 +256,27 @@ function Index() {
                     placeholder="Notas rápidas..."
                   />
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {tagSets[idx].map((t) => (
-                    <Badge key={t} className="bg-primary/10 text-primary">
-                      {t}
-                    </Badge>
-                  ))}
-                </div>
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={idx} // força ciclo: antigo faz exit, novo faz enter
+                    variants={tagsList}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="flex gap-2"
+                  >
+                    {tagSets[idx].map((t) => (
+                      <motion.span
+                        key={`${t}-${idx}`} // garante keys únicas em cada ciclo
+                        variants={tagItem}
+                        transition={{ duration: 0.28, ease: "easeOut" }}
+                        className="rounded-full bg-primary/10 px-2.5 py-1 text-xs text-primary"
+                      >
+                        {t}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
               </CardContent>
               <CardFooter className="justify-end">
                 <Button className="px-6">Salvar link</Button>
@@ -362,13 +389,27 @@ function Index() {
               <CardContent className="grid gap-3">
                 <Label htmlFor="demo-url">URL</Label>
                 <Input id="demo-url" placeholder="Cole uma URL aqui" />
-                <div className="flex flex-wrap gap-2">
-                  {tagSets[idx].map((t) => (
-                    <Badge key={t} className="bg-primary/10 text-primary">
-                      {t}
-                    </Badge>
-                  ))}
-                </div>
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={idx} // força ciclo: antigo faz exit, novo faz enter
+                    variants={tagsList}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="flex gap-2"
+                  >
+                    {tagSets[idx].map((t) => (
+                      <motion.span
+                        key={`${t}-${idx}`} // garante keys únicas em cada ciclo
+                        variants={tagItem}
+                        transition={{ duration: 0.28, ease: "easeOut" }}
+                        className="rounded-full bg-primary/10 px-2.5 py-1 text-xs text-primary"
+                      >
+                        {t}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
               </CardContent>
               <CardFooter className="justify-end">
                 <Button className="px-6">Gerar tags</Button>
