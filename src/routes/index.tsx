@@ -25,20 +25,37 @@ function Index() {
         {/* Bolha esquerda animada */}
         <motion.div
           className="absolute -left-40 top-40 h-96 w-96 rounded-full bg-primary/20 blur-3xl"
-          animate={{ x: [0, 20, -15, 0], y: [0, -15, 10, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          animate={{
+            x: [0, 20, -15, 0],
+            y: [0, -15, 10, 0],
+            scale: [1, 1.05, 0.97, 1], // pulso suave
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
 
         {/* Bolha direita animada */}
         <motion.div
           className="absolute right-0 top-96 h-96 w-96 rounded-full bg-blue-400/10 blur-3xl dark:bg-blue-500/10"
-          animate={{ x: [0, -20, 15, 0], y: [0, 10, -15, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          animate={{
+            x: [0, -20, 15, 0],
+            y: [0, 10, -15, 0],
+            scale: [1, 1.04, 0.96, 1], // pulso suave
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
 
         {/* Textura sutil */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,theme(colors.primary/5)_1px,transparent_0)] bg-[size:40px_40px] opacity-20" />
       </div>
+
       <NavHeader />
       <HeroSection />
       <SocialProof />
