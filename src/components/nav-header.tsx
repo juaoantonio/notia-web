@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { NotiaLogo } from "@/components/notia-logo.tsx";
 
 export function NavHeader() {
   return (
@@ -10,10 +9,7 @@ export function NavHeader() {
           className="group inline-flex items-center gap-2 font-semibold"
           href="#top"
         >
-          <span className="text-primary">
-            <NotiaLogo className="size-5" />
-          </span>
-          <span>Notia</span>
+          <img src="/logo.png" alt="Notia Logo" className="w-30" />
         </a>
         <nav className="hidden items-center gap-6 md:flex">
           <a

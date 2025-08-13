@@ -15,7 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { NotiaLogo } from "../../components/notia-logo.tsx";
 import { fadeUp, stagger } from "@/helpers/motion";
 import { SectionBadge } from "@/components/session-badge.tsx";
 import { TagRotator } from "@/routes/-components/tag-rotator.tsx";
@@ -103,7 +102,11 @@ export function HeroSection() {
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="text-primary">
-                  <NotiaLogo className="size-5" />
+                  <img
+                    src="/logo-responsive.png"
+                    alt="Notia Logo"
+                    className="w-6"
+                  />
                 </span>
                 <CardTitle className="text-base">Pasta: Algoritmos</CardTitle>
               </div>
