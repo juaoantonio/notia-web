@@ -288,3 +288,11 @@ Files prefixed with `demo` can be safely deleted. They are there to provide a st
 # Learn More
 
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+
+
+## Documentation
+
+- docs/context.md — Visão geral do frontend, stack e boas práticas.
+- docs/diretrizes-de-design.md — Tokens, cores, tipografia, estados e padrões visuais.
+- docs/arquitetura-de-componentes.md — Organização de componentes, escopos e convenções.
+- docs/guia-de-componentes.md — Como criar componentes, onde colocá-los e checklist.

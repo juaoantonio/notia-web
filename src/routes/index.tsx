@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { NavHeader } from "@/components/nav-header.tsx";
-import { HeroSection } from "@/routes/-components/hero-section.tsx";
-import { SocialProof } from "@/routes/-components/social-proof.tsx";
-import { FeaturesGrid } from "@/routes/-components/features-grid.tsx";
-import { DemoSection } from "@/routes/-components/demo-section.tsx";
-import { PricingSection } from "@/routes/-components/pricing-section.tsx";
-import { FaqSection } from "@/routes/-components/faq-section.tsx";
-import { CtaSection } from "@/routes/-components/cta-section.tsx";
-import { FooterSection } from "@/components/footer-section.tsx";
+import { NavHeader } from "@/components/nav-header";
+import { HeroSection } from "@/routes/-components/hero-section";
+import { SocialProof } from "@/routes/-components/social-proof";
+import { FeaturesGrid } from "@/routes/-components/features-grid";
+import { DemoSection } from "@/routes/-components/demo-section";
+import { PricingSection } from "@/routes/-components/pricing-section";
+import { FaqSection } from "@/routes/-components/faq-section";
+import { CtaSection } from "@/routes/-components/cta-section";
+import { FooterSection } from "@/components/footer-section";
 import { motion } from "motion/react";
 
 export const Route = createFileRoute("/")({

@@ -16,8 +16,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { fadeUp, stagger } from "@/helpers/motion";
-import { SectionBadge } from "@/components/session-badge.tsx";
-import { TagRotator } from "@/routes/-components/tag-rotator.tsx";
+import { SectionBadge } from "@/components/common/session-badge";
+import { TagRotator } from "@/routes/-components/tag-rotator";
 
 const tagSets = [
   ["#javascript", "#typescript", "#webdev"],
