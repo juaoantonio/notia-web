@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+
 import { Moon, Sun } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 const LS_KEY = "notia-theme";
 
@@ -24,7 +26,9 @@ export function ThemeToggle() {
     root.setAttribute("data-theme", next);
     try {
       localStorage.setItem(LS_KEY, next);
-    } catch {}
+    } catch (err) {
+      console.error(err);
+    }
     setTheme(next);
   }
 
@@ -41,11 +45,7 @@ export function ThemeToggle() {
       className="rounded-full"
       title={theme === "dark" ? "Mudar para claro" : "Mudar para escuro"}
     >
-      {theme === "dark" ? (
-        <Sun className="h-5 w-5" />
-      ) : (
-        <Moon className="h-5 w-5" />
-      )}
+      {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
     </Button>
   );
 }

@@ -1,9 +1,9 @@
 import { useState } from "react";
+
+import { Loader2 } from "lucide-react";
 import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -12,7 +12,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 type DemoSectionProps = { className?: string };
 
@@ -67,10 +69,7 @@ export function DemoSection({ className }: DemoSectionProps) {
   }
 
   return (
-    <section
-      id="demo"
-      className={cn("mx-auto max-w-7xl px-6 pb-20", className)}
-    >
+    <section id="demo" className={cn("mx-auto max-w-7xl px-6 pb-20", className)}>
       <div className="grid items-start gap-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -102,7 +101,7 @@ export function DemoSection({ className }: DemoSectionProps) {
                   {tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-primary/10 px-3 py-1 text-sm text-primary"
+                      className="bg-primary/10 text-primary rounded-full px-3 py-1 text-sm"
                     >
                       {tag}
                     </span>
@@ -112,25 +111,14 @@ export function DemoSection({ className }: DemoSectionProps) {
             </CardContent>
 
             <CardFooter className="justify-between gap-3">
-              <Button
-                variant="outline"
-                onClick={handleClear}
-                disabled={loading}
-              >
+              <Button variant="outline" onClick={handleClear} disabled={loading}>
                 Limpar
               </Button>
 
-              <Button
-                className="px-6"
-                onClick={handleGenerate}
-                disabled={loading}
-              >
+              <Button className="px-6" onClick={handleGenerate} disabled={loading}>
                 {loading ? (
                   <>
-                    <Loader2
-                      className="mr-2 h-4 w-4 animate-spin"
-                      aria-hidden
-                    />
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
                     Gerando…
                   </>
                 ) : (

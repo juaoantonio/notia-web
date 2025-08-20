@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,10 +15,8 @@ export function PricingSection() {
   return (
     <section id="pricing" className="mx-auto max-w-7xl px-6 pb-20">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-          Preços simples
-        </h2>
-        <p className="mt-3 text-muted-foreground">
+        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Preços simples</h2>
+        <p className="text-muted-foreground mt-3">
           Plano gratuito para começar. Atualize quando precisar de mais.
         </p>
       </div>
@@ -33,9 +32,7 @@ export function PricingSection() {
           <Card className="shadow-sm">
             <CardHeader>
               <CardTitle>Grátis</CardTitle>
-              <CardDescription>
-                Para começar a organizar seus estudos.
-              </CardDescription>
+              <CardDescription>Para começar a organizar seus estudos.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="text-4xl font-bold">R$0</div>
@@ -53,8 +50,8 @@ export function PricingSection() {
         </motion.div>
 
         <motion.div variants={fadeUp}>
-          <Card className="relative shadow-sm ring-1 ring-primary">
-            <span className="absolute -top-3 right-6 rounded-full bg-primary px-2 py-1 text-xs font-medium text-primary-foreground">
+          <Card className="ring-primary relative shadow-sm ring-1">
+            <span className="bg-primary text-primary-foreground absolute -top-3 right-6 rounded-full px-2 py-1 text-xs font-medium">
               Mais popular
             </span>
             <CardHeader>
@@ -64,9 +61,7 @@ export function PricingSection() {
             <CardContent>
               <div className="text-4xl font-bold">
                 R$29
-                <span className="text-base font-normal text-muted-foreground">
-                  /mês
-                </span>
+                <span className="text-muted-foreground text-base font-normal">/mês</span>
               </div>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>• Links e pastas ilimitados</li>
@@ -82,7 +77,7 @@ export function PricingSection() {
         </motion.div>
       </motion.div>
 
-      <p className="mt-4 text-center text-xs text-muted-foreground">
+      <p className="text-muted-foreground mt-4 text-center text-xs">
         Planos institucionais para escolas e universidades.
       </p>
     </section>

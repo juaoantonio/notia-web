@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+
 import { cn } from "@/lib/utils";
 
 export type TagRotatorProps = {
@@ -61,7 +63,7 @@ export function TagRotator({
               variants={item}
               transition={{ duration, ease: "easeOut" }}
               className={cn(
-                "rounded-full bg-primary/10 px-2.5 py-1 text-xs text-primary",
+                "bg-primary/10 text-primary rounded-full px-2.5 py-1 text-xs",
                 chipClassName,
               )}
             >

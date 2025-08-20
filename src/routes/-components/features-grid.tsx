@@ -1,10 +1,3 @@
-import { motion } from "motion/react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   BrainCircuitIcon,
   BrickWall,
@@ -13,6 +6,9 @@ import {
   MousePointer,
   Search,
 } from "lucide-react";
+import { motion } from "motion/react";
+
+import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { fadeUp, stagger } from "@/helpers/motion";
 
 const items = [
@@ -52,12 +48,9 @@ export function FeaturesGrid() {
   return (
     <section id="features" className="mx-auto max-w-7xl px-6 py-20">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-          Feito para estudar melhor
-        </h2>
-        <p className="mt-3 text-muted-foreground">
-          Velocidade, organização e privacidade — com IA para acelerar o que
-          importa.
+        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Feito para estudar melhor</h2>
+        <p className="text-muted-foreground mt-3">
+          Velocidade, organização e privacidade — com IA para acelerar o que importa.
         </p>
       </div>
 
@@ -69,14 +62,10 @@ export function FeaturesGrid() {
         variants={stagger}
       >
         {items.map((f) => (
-          <motion.div
-            key={f.title}
-            variants={fadeUp}
-            transition={{ duration: 0.35 }}
-          >
-            <Card className="shadow-sm hover:shadow-md transition-shadow">
+          <motion.div key={f.title} variants={fadeUp} transition={{ duration: 0.35 }}>
+            <Card className="shadow-sm transition-shadow hover:shadow-md">
               <CardContent className="p-6">
-                <div className="mb-4 inline-flex rounded-md bg-primary/10 p-3 text-primary">
+                <div className="bg-primary/10 text-primary mb-4 inline-flex rounded-md p-3">
                   <f.icon className="size-6" />
                 </div>
                 <CardTitle className="text-lg">{f.title}</CardTitle>
