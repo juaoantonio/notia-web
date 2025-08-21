@@ -1,5 +1,6 @@
 // Base (mobile) — leve, sem invadir demais a área útil
-import type { BubbleConfig } from "@/routes/-components/animated-background.tsx";
+
+import type { BubbleConfig } from "@/components/common/animated-background.tsx";
 
 export const bubblesBase: BubbleConfig[] = [
   // topo/esquerda
