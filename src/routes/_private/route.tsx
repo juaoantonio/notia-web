@@ -1,9 +1,28 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/_private')({
-  component: RouteComponent,
-})
+import { meQueryOptions } from "@/modules/auth/auth.queries.ts";
 
-function RouteComponent() {
-  return <div>Hello "/_private"!</div>
+export const Route = createFileRoute("/_private")({
+  beforeLoad: async ({ context, location }) => {
+    const me = await context.queryClient.ensureQueryData(meQueryOptions);
+    if (!me) {
+      throw redirect({
+        to: "/auth/login",
+        search: { redirect: location.href },
+        replace: true,
+      });
+    }
+  },
+  component: HomeLayout,
+  staticData: {
+    navigable: false,
+  },
+});
+
+function HomeLayout() {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 }

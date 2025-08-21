@@ -13,6 +13,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PrivateRouteRouteImport } from './routes/_private/route'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
+import { Route as PrivateHomeIndexRouteImport } from './routes/_private/home/index'
+import { Route as PrivateHomeFoldersRouteImport } from './routes/_private/home/folders'
 import { Route as publicAuthLayoutRouteImport } from './routes/(public)/auth/_layout'
 import { Route as publicAuthLayoutRegisterRouteImport } from './routes/(public)/auth/_layout.register'
 import { Route as publicAuthLayoutLoginRouteImport } from './routes/(public)/auth/_layout.login'
@@ -33,6 +35,16 @@ const publicIndexRoute = publicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivateHomeIndexRoute = PrivateHomeIndexRouteImport.update({
+  id: '/home/',
+  path: '/home/',
+  getParentRoute: () => PrivateRouteRoute,
+} as any)
+const PrivateHomeFoldersRoute = PrivateHomeFoldersRouteImport.update({
+  id: '/home/folders',
+  path: '/home/folders',
+  getParentRoute: () => PrivateRouteRoute,
+} as any)
 const publicAuthLayoutRoute = publicAuthLayoutRouteImport.update({
   id: '/_layout',
   getParentRoute: () => publicAuthRoute,
@@ -52,41 +64,61 @@ const publicAuthLayoutLoginRoute = publicAuthLayoutLoginRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof publicIndexRoute
   '/auth': typeof publicAuthLayoutRouteWithChildren
+  '/home/folders': typeof PrivateHomeFoldersRoute
+  '/home': typeof PrivateHomeIndexRoute
   '/auth/login': typeof publicAuthLayoutLoginRoute
   '/auth/register': typeof publicAuthLayoutRegisterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof publicIndexRoute
   '/auth': typeof publicAuthLayoutRouteWithChildren
+  '/home/folders': typeof PrivateHomeFoldersRoute
+  '/home': typeof PrivateHomeIndexRoute
   '/auth/login': typeof publicAuthLayoutLoginRoute
   '/auth/register': typeof publicAuthLayoutRegisterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_private': typeof PrivateRouteRoute
+  '/_private': typeof PrivateRouteRouteWithChildren
   '/(public)/': typeof publicIndexRoute
   '/(public)/auth': typeof publicAuthRouteWithChildren
   '/(public)/auth/_layout': typeof publicAuthLayoutRouteWithChildren
+  '/_private/home/folders': typeof PrivateHomeFoldersRoute
+  '/_private/home/': typeof PrivateHomeIndexRoute
   '/(public)/auth/_layout/login': typeof publicAuthLayoutLoginRoute
   '/(public)/auth/_layout/register': typeof publicAuthLayoutRegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/auth/login' | '/auth/register'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/home/folders'
+    | '/home'
+    | '/auth/login'
+    | '/auth/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/auth/login' | '/auth/register'
+  to:
+    | '/'
+    | '/auth'
+    | '/home/folders'
+    | '/home'
+    | '/auth/login'
+    | '/auth/register'
   id:
     | '__root__'
     | '/_private'
     | '/(public)/'
     | '/(public)/auth'
     | '/(public)/auth/_layout'
+    | '/_private/home/folders'
+    | '/_private/home/'
     | '/(public)/auth/_layout/login'
     | '/(public)/auth/_layout/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  PrivateRouteRoute: typeof PrivateRouteRoute
+  PrivateRouteRoute: typeof PrivateRouteRouteWithChildren
   publicIndexRoute: typeof publicIndexRoute
   publicAuthRoute: typeof publicAuthRouteWithChildren
 }
@@ -114,6 +146,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_private/home/': {
+      id: '/_private/home/'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof PrivateHomeIndexRouteImport
+      parentRoute: typeof PrivateRouteRoute
+    }
+    '/_private/home/folders': {
+      id: '/_private/home/folders'
+      path: '/home/folders'
+      fullPath: '/home/folders'
+      preLoaderRoute: typeof PrivateHomeFoldersRouteImport
+      parentRoute: typeof PrivateRouteRoute
+    }
     '/(public)/auth/_layout': {
       id: '/(public)/auth/_layout'
       path: '/auth'
@@ -137,6 +183,20 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface PrivateRouteRouteChildren {
+  PrivateHomeFoldersRoute: typeof PrivateHomeFoldersRoute
+  PrivateHomeIndexRoute: typeof PrivateHomeIndexRoute
+}
+
+const PrivateRouteRouteChildren: PrivateRouteRouteChildren = {
+  PrivateHomeFoldersRoute: PrivateHomeFoldersRoute,
+  PrivateHomeIndexRoute: PrivateHomeIndexRoute,
+}
+
+const PrivateRouteRouteWithChildren = PrivateRouteRoute._addFileChildren(
+  PrivateRouteRouteChildren,
+)
 
 interface publicAuthLayoutRouteChildren {
   publicAuthLayoutLoginRoute: typeof publicAuthLayoutLoginRoute
@@ -164,7 +224,7 @@ const publicAuthRouteWithChildren = publicAuthRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  PrivateRouteRoute: PrivateRouteRoute,
+  PrivateRouteRoute: PrivateRouteRouteWithChildren,
   publicIndexRoute: publicIndexRoute,
   publicAuthRoute: publicAuthRouteWithChildren,
 }
