@@ -11,6 +11,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PrivateRouteRouteImport } from './routes/_private/route'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as publicAuthLayoutRouteImport } from './routes/(public)/auth/_layout'
 import { Route as publicAuthLayoutRegisterRouteImport } from './routes/(public)/auth/_layout.register'
@@ -18,6 +19,10 @@ import { Route as publicAuthLayoutLoginRouteImport } from './routes/(public)/aut
 
 const publicAuthRouteImport = createFileRoute('/(public)/auth')()
 
+const PrivateRouteRoute = PrivateRouteRouteImport.update({
+  id: '/_private',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const publicAuthRoute = publicAuthRouteImport.update({
   id: '/(public)/auth',
   path: '/auth',
@@ -58,6 +63,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_private': typeof PrivateRouteRoute
   '/(public)/': typeof publicIndexRoute
   '/(public)/auth': typeof publicAuthRouteWithChildren
   '/(public)/auth/_layout': typeof publicAuthLayoutRouteWithChildren
@@ -71,6 +77,7 @@ export interface FileRouteTypes {
   to: '/' | '/auth' | '/auth/login' | '/auth/register'
   id:
     | '__root__'
+    | '/_private'
     | '/(public)/'
     | '/(public)/auth'
     | '/(public)/auth/_layout'
@@ -79,12 +86,20 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  PrivateRouteRoute: typeof PrivateRouteRoute
   publicIndexRoute: typeof publicIndexRoute
   publicAuthRoute: typeof publicAuthRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_private': {
+      id: '/_private'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PrivateRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(public)/auth': {
       id: '/(public)/auth'
       path: '/auth'
@@ -149,6 +164,7 @@ const publicAuthRouteWithChildren = publicAuthRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
+  PrivateRouteRoute: PrivateRouteRoute,
   publicIndexRoute: publicIndexRoute,
   publicAuthRoute: publicAuthRouteWithChildren,
 }
