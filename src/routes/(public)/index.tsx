@@ -3,15 +3,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AnimatedBackground } from "@/components/common/animated-background.tsx";
 import { FooterSection } from "@/components/footer-section";
 import { NavHeader } from "@/components/nav-header";
-import { CtaSection } from "@/routes/-components/cta-section";
-import { DemoSection } from "@/routes/-components/demo-section";
-import { FaqSection } from "@/routes/-components/faq-section";
-import { FeaturesGrid } from "@/routes/-components/features-grid";
-import { HeroSection } from "@/routes/-components/hero-section";
-import { PricingSection } from "@/routes/-components/pricing-section";
-import { SocialProof } from "@/routes/-components/social-proof";
+import { CtaSection } from "@/routes/(public)/-components/cta-section.tsx";
+import { DemoSection } from "@/routes/(public)/-components/demo-section.tsx";
+import { FaqSection } from "@/routes/(public)/-components/faq-section.tsx";
+import { FeaturesGrid } from "@/routes/(public)/-components/features-grid.tsx";
+import { HeroSection } from "@/routes/(public)/-components/hero-section.tsx";
+import { PricingSection } from "@/routes/(public)/-components/pricing-section.tsx";
+import { SocialProof } from "@/routes/(public)/-components/social-proof.tsx";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/(public)/")({
   component: Index,
 });
 

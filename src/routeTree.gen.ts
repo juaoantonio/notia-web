@@ -11,57 +11,58 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthLayoutRouteImport } from './routes/auth/_layout'
-import { Route as AuthLayoutRegisterRouteImport } from './routes/auth/_layout.register'
-import { Route as AuthLayoutLoginRouteImport } from './routes/auth/_layout.login'
+import { Route as publicIndexRouteImport } from './routes/(public)/index'
+import { Route as publicAuthLayoutRouteImport } from './routes/(public)/auth/_layout'
+import { Route as publicAuthLayoutRegisterRouteImport } from './routes/(public)/auth/_layout.register'
+import { Route as publicAuthLayoutLoginRouteImport } from './routes/(public)/auth/_layout.login'
 
-const AuthRouteImport = createFileRoute('/auth')()
+const publicAuthRouteImport = createFileRoute('/(public)/auth')()
 
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
+const publicAuthRoute = publicAuthRouteImport.update({
+  id: '/(public)/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
+const publicIndexRoute = publicIndexRouteImport.update({
+  id: '/(public)/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthLayoutRoute = AuthLayoutRouteImport.update({
+const publicAuthLayoutRoute = publicAuthLayoutRouteImport.update({
   id: '/_layout',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => publicAuthRoute,
 } as any)
-const AuthLayoutRegisterRoute = AuthLayoutRegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => AuthLayoutRoute,
-} as any)
-const AuthLayoutLoginRoute = AuthLayoutLoginRouteImport.update({
+const publicAuthLayoutRegisterRoute =
+  publicAuthLayoutRegisterRouteImport.update({
+    id: '/register',
+    path: '/register',
+    getParentRoute: () => publicAuthLayoutRoute,
+  } as any)
+const publicAuthLayoutLoginRoute = publicAuthLayoutLoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => AuthLayoutRoute,
+  getParentRoute: () => publicAuthLayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/auth': typeof AuthLayoutRouteWithChildren
-  '/auth/login': typeof AuthLayoutLoginRoute
-  '/auth/register': typeof AuthLayoutRegisterRoute
+  '/': typeof publicIndexRoute
+  '/auth': typeof publicAuthLayoutRouteWithChildren
+  '/auth/login': typeof publicAuthLayoutLoginRoute
+  '/auth/register': typeof publicAuthLayoutRegisterRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/auth': typeof AuthLayoutRouteWithChildren
-  '/auth/login': typeof AuthLayoutLoginRoute
-  '/auth/register': typeof AuthLayoutRegisterRoute
+  '/': typeof publicIndexRoute
+  '/auth': typeof publicAuthLayoutRouteWithChildren
+  '/auth/login': typeof publicAuthLayoutLoginRoute
+  '/auth/register': typeof publicAuthLayoutRegisterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/auth': typeof AuthRouteWithChildren
-  '/auth/_layout': typeof AuthLayoutRouteWithChildren
-  '/auth/_layout/login': typeof AuthLayoutLoginRoute
-  '/auth/_layout/register': typeof AuthLayoutRegisterRoute
+  '/(public)/': typeof publicIndexRoute
+  '/(public)/auth': typeof publicAuthRouteWithChildren
+  '/(public)/auth/_layout': typeof publicAuthLayoutRouteWithChildren
+  '/(public)/auth/_layout/login': typeof publicAuthLayoutLoginRoute
+  '/(public)/auth/_layout/register': typeof publicAuthLayoutRegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -70,85 +71,86 @@ export interface FileRouteTypes {
   to: '/' | '/auth' | '/auth/login' | '/auth/register'
   id:
     | '__root__'
-    | '/'
-    | '/auth'
-    | '/auth/_layout'
-    | '/auth/_layout/login'
-    | '/auth/_layout/register'
+    | '/(public)/'
+    | '/(public)/auth'
+    | '/(public)/auth/_layout'
+    | '/(public)/auth/_layout/login'
+    | '/(public)/auth/_layout/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRouteWithChildren
+  publicIndexRoute: typeof publicIndexRoute
+  publicAuthRoute: typeof publicAuthRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
+    '/(public)/auth': {
+      id: '/(public)/auth'
       path: '/auth'
       fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+      preLoaderRoute: typeof publicAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/(public)/': {
+      id: '/(public)/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof publicIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/_layout': {
-      id: '/auth/_layout'
+    '/(public)/auth/_layout': {
+      id: '/(public)/auth/_layout'
       path: '/auth'
       fullPath: '/auth'
-      preLoaderRoute: typeof AuthLayoutRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof publicAuthLayoutRouteImport
+      parentRoute: typeof publicAuthRoute
     }
-    '/auth/_layout/register': {
-      id: '/auth/_layout/register'
+    '/(public)/auth/_layout/register': {
+      id: '/(public)/auth/_layout/register'
       path: '/register'
       fullPath: '/auth/register'
-      preLoaderRoute: typeof AuthLayoutRegisterRouteImport
-      parentRoute: typeof AuthLayoutRoute
+      preLoaderRoute: typeof publicAuthLayoutRegisterRouteImport
+      parentRoute: typeof publicAuthLayoutRoute
     }
-    '/auth/_layout/login': {
-      id: '/auth/_layout/login'
+    '/(public)/auth/_layout/login': {
+      id: '/(public)/auth/_layout/login'
       path: '/login'
       fullPath: '/auth/login'
-      preLoaderRoute: typeof AuthLayoutLoginRouteImport
-      parentRoute: typeof AuthLayoutRoute
+      preLoaderRoute: typeof publicAuthLayoutLoginRouteImport
+      parentRoute: typeof publicAuthLayoutRoute
     }
   }
 }
 
-interface AuthLayoutRouteChildren {
-  AuthLayoutLoginRoute: typeof AuthLayoutLoginRoute
-  AuthLayoutRegisterRoute: typeof AuthLayoutRegisterRoute
+interface publicAuthLayoutRouteChildren {
+  publicAuthLayoutLoginRoute: typeof publicAuthLayoutLoginRoute
+  publicAuthLayoutRegisterRoute: typeof publicAuthLayoutRegisterRoute
 }
 
-const AuthLayoutRouteChildren: AuthLayoutRouteChildren = {
-  AuthLayoutLoginRoute: AuthLayoutLoginRoute,
-  AuthLayoutRegisterRoute: AuthLayoutRegisterRoute,
+const publicAuthLayoutRouteChildren: publicAuthLayoutRouteChildren = {
+  publicAuthLayoutLoginRoute: publicAuthLayoutLoginRoute,
+  publicAuthLayoutRegisterRoute: publicAuthLayoutRegisterRoute,
 }
 
-const AuthLayoutRouteWithChildren = AuthLayoutRoute._addFileChildren(
-  AuthLayoutRouteChildren,
+const publicAuthLayoutRouteWithChildren =
+  publicAuthLayoutRoute._addFileChildren(publicAuthLayoutRouteChildren)
+
+interface publicAuthRouteChildren {
+  publicAuthLayoutRoute: typeof publicAuthLayoutRouteWithChildren
+}
+
+const publicAuthRouteChildren: publicAuthRouteChildren = {
+  publicAuthLayoutRoute: publicAuthLayoutRouteWithChildren,
+}
+
+const publicAuthRouteWithChildren = publicAuthRoute._addFileChildren(
+  publicAuthRouteChildren,
 )
 
-interface AuthRouteChildren {
-  AuthLayoutRoute: typeof AuthLayoutRouteWithChildren
-}
-
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthLayoutRoute: AuthLayoutRouteWithChildren,
-}
-
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AuthRoute: AuthRouteWithChildren,
+  publicIndexRoute: publicIndexRoute,
+  publicAuthRoute: publicAuthRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { fadeUp, stagger } from "@/helpers/motion";
-import { TagRotator } from "@/routes/-components/tag-rotator";
+import { TagRotator } from "@/routes/(public)/-components/tag-rotator.tsx";
 
 const tagSets = [
   ["#javascript", "#typescript", "#webdev"],
