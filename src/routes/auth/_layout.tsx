@@ -1,8 +1,8 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { ChevronLeftIcon } from "lucide-react";
 
+import { AnimatedBackground } from "@/components/common/animated-background.tsx";
 import { useBreakpointValue } from "@/hooks/use-breakpoint-value.ts";
-import { AnimatedBackground } from "@/routes/-components/animated-background.tsx";
 import { AsideLogoPanel } from "@/routes/auth/-components/aside-logo-panel.tsx";
 import { bubblesBase, bubblesLg } from "@/routes/auth/-components/bubble-config.ts";
 

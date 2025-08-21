@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { AnimatedBackground } from "@/components/common/animated-background.tsx";
 import { FooterSection } from "@/components/footer-section";
 import { NavHeader } from "@/components/nav-header";
-import { AnimatedBackground } from "@/routes/-components/animated-background.tsx";
 import { CtaSection } from "@/routes/-components/cta-section";
 import { DemoSection } from "@/routes/-components/demo-section";
 import { FaqSection } from "@/routes/-components/faq-section";
