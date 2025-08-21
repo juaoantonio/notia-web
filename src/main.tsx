@@ -1,5 +1,6 @@
-import { StrictMode } from "react";
+import { type ReactNode, StrictMode } from "react";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
 
@@ -7,10 +8,14 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals.ts";
 import { routeTree } from "./routeTree.gen";
 
+const queryClient = new QueryClient();
+
 // Create a new router instance
 const router = createRouter({
   routeTree,
-  context: {},
+  context: {
+    queryClient,
+  },
   defaultPreload: "intent",
   scrollRestoration: true,
   defaultStructuralSharing: true,
@@ -24,13 +29,28 @@ declare module "@tanstack/react-router" {
   }
 }
 
+type BreadcrumbValue =
+  | string
+  | ReactNode
+  | ((params: Record<string, string>) => string | ReactNode);
+
+declare module "@tanstack/react-router" {
+  interface StaticDataRouteOption {
+    /** Rótulo do breadcrumb (string, ReactNode ou função que usa params) */
+    breadcrumb?: BreadcrumbValue;
+    navigable?: boolean;
+  }
+}
+
 // Render the app
 const rootElement = document.getElementById("app");
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </StrictMode>,
   );
 }
