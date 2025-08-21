@@ -6,6 +6,10 @@ import { Separator } from "@/components/ui/separator.tsx";
 
 export const Route = createFileRoute("/auth/_layout/register")({
   component: RegisterPage,
+  staticData: {
+    navigable: true,
+    breadcrumb: "Cadastro",
+  },
 });
 
 function RegisterPage() {

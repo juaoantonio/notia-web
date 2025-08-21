@@ -6,6 +6,10 @@ import { Separator } from "@/components/ui/separator";
 
 export const Route = createFileRoute("/auth/_layout/login")({
   component: LoginPage,
+  staticData: {
+    breadcrumb: "Login",
+    navigable: true,
+  },
 });
 
 function LoginPage() {
