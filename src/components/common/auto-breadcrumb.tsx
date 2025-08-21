@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 type AutoBreadcrumbProps = {
+  /** Caminho base */
+  rootPath: string;
   /** Máximo de itens inline (inclui root e o último). Default: 3 (root, …, último). */
   size?: number;
   /** Rótulo da raiz. */
@@ -29,12 +31,25 @@ type AutoBreadcrumbProps = {
 const normalizeHref = (href: string) =>
   href.replace(/\/_layout(\/|$)/g, "/").replace(/\/{2,}/g, "/");
 
-export function AutoBreadcrumb({ size = 3, rootLabel = "Home", className }: AutoBreadcrumbProps) {
+function normalizePath(path: string) {
+  return path.replace(/\/+$/, "") || "/";
+  // remove barras finais, mas mantém "/" se for root
+}
+
+export function AutoBreadcrumb({
+  size = 3,
+  rootLabel = "Home",
+  rootPath,
+  className,
+}: AutoBreadcrumbProps) {
   const matches = useMatches();
+  const root = normalizePath(rootPath);
 
   // Só mostra rotas explicitamente navegáveis
   const items = matches
-    .filter((m) => m.staticData?.navigable === true && m.pathname && m.pathname !== "/")
+    .filter(
+      (m) => m.staticData?.navigable === true && m.pathname && normalizePath(m.pathname) !== root,
+    )
     .map((m) => {
       const label =
         typeof m.staticData?.breadcrumb === "function"
@@ -59,7 +74,7 @@ export function AutoBreadcrumb({ size = 3, rootLabel = "Home", className }: Auto
         <BreadcrumbItem>
           {total ? (
             <BreadcrumbLink asChild>
-              <Link to="/">{rootLabel}</Link>
+              <Link to={`${rootPath}`}>{rootLabel}</Link>
             </BreadcrumbLink>
           ) : (
             <BreadcrumbPage>{rootLabel}</BreadcrumbPage>
@@ -80,7 +95,7 @@ export function AutoBreadcrumb({ size = 3, rootLabel = "Home", className }: Auto
 
         {/* Dropdown com middle escondidos */}
         {hiddenMiddle.length > 0 && (
-          <>
+          <Fragment>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <DropdownMenu>
@@ -100,7 +115,7 @@ export function AutoBreadcrumb({ size = 3, rootLabel = "Home", className }: Auto
                 </DropdownMenuContent>
               </DropdownMenu>
             </BreadcrumbItem>
-          </>
+          </Fragment>
         )}
 
         {/* Último (página atual) */}

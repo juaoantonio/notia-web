@@ -27,7 +27,7 @@ function AuthLayout() {
       <section className="mx-auto grid h-full flex-1 grid-cols-1 overflow-hidden drop-shadow-2xl lg:h-180 lg:max-w-320 lg:grid-cols-2 lg:rounded lg:border">
         {/* Coluna esquerda: Área de login */}
         <div className="bg-background/30 lg:bg-background flex flex-col items-center justify-center p-6 lg:p-12">
-          <AutoBreadcrumb className={"self-start"} />
+          <AutoBreadcrumb className={"self-start"} rootPath={"/"} />
           <Outlet />
         </div>
 
