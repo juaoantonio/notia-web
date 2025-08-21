@@ -27,14 +27,14 @@ export function NavHeader() {
         <div className="flex items-center gap-3">
           <Link
             className="text-muted-foreground hover:text-foreground hidden text-sm md:inline"
-            to={"/login"}
+            to={"/auth/login"}
           >
             Entrar
           </Link>
           <ThemeToggle />
 
           <Button asChild className="px-5">
-            <Link to={"/register"}>Criar Conta</Link>
+            <Link to={"/auth/register"}>Criar Conta</Link>
           </Button>
         </div>
       </div>
