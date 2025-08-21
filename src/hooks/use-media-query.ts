@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 /**
  * Observa várias media queries de uma só vez.
@@ -12,26 +12,29 @@ import { useEffect, useState } from "react";
  * ]);
  */
 export function useMediaQueries(queries: string[]): boolean[] {
-  const [matches, setMatches] = useState<boolean[]>(() => {
-    return queries.map((q) => window.matchMedia(q).matches);
-  });
+  const signature = useMemo(() => queries.join("|"), [queries]);
 
-  // Recria listeners quando a lista de queries muda (length/valores)
+  const [matches, setMatches] = useState(() => queries.map((q) => window.matchMedia(q).matches));
+
   useEffect(() => {
-    const mediaQueryLists = queries.map((q) => window.matchMedia(q));
+    const mqls = queries.map((q) => window.matchMedia(q));
+    const update = () => {
+      const next = mqls.map((mql) => mql.matches);
+      setMatches((prev) => {
+        for (let i = 0; i < prev.length; i++) {
+          if (prev[i] !== next[i]) return next;
+        }
+        return prev; // evita re-render inútil
+      });
+    };
 
-    const update = () => setMatches(mediaQueryLists.map((mql) => mql.matches));
-
-    // sync inicial
     update();
-
-    // listeners
-    mediaQueryLists.forEach((mql) => mql.addEventListener("change", update));
+    mqls.forEach((mql) => mql.addEventListener("change", update));
 
     return () => {
-      mediaQueryLists.forEach((mql) => mql.removeEventListener("change", update));
+      mqls.forEach((mql) => mql.removeEventListener("change", update));
     };
-  }, [queries]);
+  }, [queries, signature]);
 
   return matches;
 }
