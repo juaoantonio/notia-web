@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 
@@ -23,14 +25,17 @@ export function NavHeader() {
           </a>
         </nav>
         <div className="flex items-center gap-3">
-          <a
+          <Link
             className="text-muted-foreground hover:text-foreground hidden text-sm md:inline"
-            href="#login"
+            to={"/login"}
           >
             Entrar
-          </a>
+          </Link>
           <ThemeToggle />
-          <Button className="px-5">Criar conta</Button>
+
+          <Button asChild className="px-5">
+            <Link to={"/register"}>Criar Conta</Link>
+          </Button>
         </div>
       </div>
     </header>
