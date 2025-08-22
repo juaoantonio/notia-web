@@ -7,7 +7,7 @@ export function LogoutButton() {
   const { mutate, isPending } = useLogoutMutation();
   return (
     <Button
-      variant="outline"
+      variant="destructive"
       onClick={() => mutate()}
       disabled={isPending}
       className="gap-2"

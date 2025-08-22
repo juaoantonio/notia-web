@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch.tsx";
 import { meQueryOptions } from "@/modules/auth/auth.queries";
 
 import { LogoutButton } from "./-components/logout-button";
@@ -73,7 +74,7 @@ function SettingsPage() {
           left={<Shield className="h-4 w-4" />}
           title="Pastas privadas por padrão"
           subtitle="Itens criados começam privados (recomendado)"
-          right={<span className="text-muted-foreground text-xs">Ativo</span>}
+          right={<Switch />}
         />
       </SettingsSection>
 
