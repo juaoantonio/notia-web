@@ -35,11 +35,10 @@ function RegisterPage() {
       >
         <GoogleLoginButton className="bg-background h-11 w-full items-center justify-center gap-3" />
 
-        <div className="relative">
-          <Separator />
-          <span className="bg-background text-muted-foreground absolute -top-3 left-1/2 -translate-x-1/2 px-2 text-xs">
-            ou
-          </span>
+        <div className={"flex items-center justify-center gap-1"}>
+          <Separator className={"flex-1"} />
+          <span className="text-muted-foreground px-2 text-xs">ou</span>
+          <Separator className={"flex-1"} />
         </div>
 
         <Link
