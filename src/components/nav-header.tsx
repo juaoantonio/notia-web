@@ -7,9 +7,17 @@ export function NavHeader() {
   return (
     <header className="bg-background/70 sticky top-0 z-50 border-b backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a className="group inline-flex items-center gap-2 font-semibold" href="#top">
-          <img src="/logo.png" alt="Notia Logo" className="w-30" />
+        <a
+          className="group inline-flex items-center gap-2 font-semibold"
+          href="#top"
+          aria-label="Ir ao topo"
+        >
+          {/* Mobile: logo responsiva */}
+          <img src="/logo-responsive.png" alt="Notia Logo" className="h-10 md:hidden" />
+          {/* Desktop: logo padrão */}
+          <img src="/logo.png" alt="Notia Logo" className="hidden h-10 md:block" />
         </a>
+
         <nav className="hidden items-center gap-6 md:flex">
           <a className="text-muted-foreground hover:text-foreground text-sm" href="#features">
             Recursos
@@ -24,6 +32,7 @@ export function NavHeader() {
             FAQ
           </a>
         </nav>
+
         <div className="flex items-center gap-3">
           <Link
             className="text-muted-foreground hover:text-foreground hidden text-sm md:inline"
@@ -32,7 +41,6 @@ export function NavHeader() {
             Entrar
           </Link>
           <ThemeToggle />
-
           <Button asChild className="px-5">
             <Link to={"/auth/register"}>Criar Conta</Link>
           </Button>
