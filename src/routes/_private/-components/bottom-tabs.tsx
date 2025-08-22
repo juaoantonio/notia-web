@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { TabLink } from "@/routes/_private/-components/tab-link.tsx";
-import type { TabItem } from "@/routes/_private/-types.ts";
+import type { TabItem } from "@/routes/_private/-components/types.ts";
 
 type Props = { items: TabItem[] };
 

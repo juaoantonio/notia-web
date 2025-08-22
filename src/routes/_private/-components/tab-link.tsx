@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { cn } from "@/lib/utils";
-import type { TabItem } from "@/routes/_private/-types.ts";
+import type { TabItem } from "@/routes/_private/-components/types.ts";
 
 export function TabLink({ to, icon: Icon, label, disabled }: TabItem) {
   if (disabled) {
