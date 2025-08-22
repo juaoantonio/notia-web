@@ -4,14 +4,13 @@ import { Badge } from "@/components/ui/badge.tsx";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import type { Folder } from "@/modules/home/home.types";
 
-
 type Props = { favorites: Folder[]; loading: boolean };
 
 export function FavoritesSection({ favorites, loading }: Props) {
   return (
     <section className="space-y-2">
       <div className="flex items-center justify-between">
-        <h2 className="text-muted-foreground text-sm font-medium">MY FAVORITES</h2>
+        <h2 className="text-muted-foreground text-sm font-medium">Meus Favoritos</h2>
         <span className="text-muted-foreground text-xs">{favorites.length}</span>
       </div>
 

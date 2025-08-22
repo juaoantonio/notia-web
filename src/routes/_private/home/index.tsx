@@ -41,7 +41,7 @@ function HomePage() {
       <RecentLinksList recent={recent ?? []} loading={loadingRecent} />
 
       <Separator className="my-6" />
-      <div className="text-muted-foreground text-xs">More coming soon…</div>
+      <div className="text-muted-foreground text-xs">Em breve mais funcionalidades...</div>
     </div>
   );
 }

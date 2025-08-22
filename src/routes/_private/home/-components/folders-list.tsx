@@ -12,7 +12,7 @@ export function FoldersList({ folders, loading }: Props) {
   return (
     <section className="space-y-2">
       <div className="flex items-center justify-between">
-        <h2 className="text-muted-foreground text-sm font-medium">MY FOLDERS</h2>
+        <h2 className="text-muted-foreground text-sm font-medium">Minhas Pastas</h2>
         {!loading && <span className="text-muted-foreground text-xs">{folders.length}</span>}
       </div>
 

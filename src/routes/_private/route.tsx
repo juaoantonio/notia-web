@@ -30,10 +30,10 @@ export function PrivateLayout() {
   const { data: me } = useQuery(meQueryOptions);
 
   const tabs: TabItem[] = [
-    { to: "/_private/home", icon: Lock, label: "My vault" },
-    { to: "/_private/send", icon: Send, label: "Send", disabled: true },
-    { to: "/_private/generator", icon: Wand2, label: "Generator", disabled: true },
-    { to: "/_private/settings", icon: Settings, label: "Settings", disabled: true },
+    { to: "/_private/home", icon: Lock, label: "Meu cofre" },
+    { to: "/_private/send", icon: Send, label: "Enviar", disabled: true },
+    { to: "/_private/generator", icon: Wand2, label: "Gerador", disabled: true },
+    { to: "/_private/settings", icon: Settings, label: "Configurações", disabled: true },
   ];
 
   return (
