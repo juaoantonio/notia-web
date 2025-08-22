@@ -4,7 +4,7 @@ export type Folder = {
   description: string;
   isPublic: boolean;
   linksCount: number;
-  favorite?: boolean;
+  favorite: boolean;
 };
 
 export type LinkItem = {
