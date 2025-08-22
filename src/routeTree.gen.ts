@@ -14,6 +14,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteRouteImport } from './routes/_public/route'
 import { Route as PrivateRouteRouteImport } from './routes/_private/route'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PrivateSettingsIndexRouteImport } from './routes/_private/settings/index'
 import { Route as PrivateHomeIndexRouteImport } from './routes/_private/home/index'
 import { Route as PublicAuthLayoutRouteImport } from './routes/_public/auth/_layout'
 import { Route as PublicAuthLayoutRegisterRouteImport } from './routes/_public/auth/_layout.register'
@@ -38,6 +39,11 @@ const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => PublicRouteRoute,
+} as any)
+const PrivateSettingsIndexRoute = PrivateSettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => PrivateRouteRoute,
 } as any)
 const PrivateHomeIndexRoute = PrivateHomeIndexRouteImport.update({
   id: '/home/',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
   '/auth': typeof PublicAuthLayoutRouteWithChildren
   '/home': typeof PrivateHomeIndexRoute
+  '/settings': typeof PrivateSettingsIndexRoute
   '/auth/login': typeof PublicAuthLayoutLoginRoute
   '/auth/register': typeof PublicAuthLayoutRegisterRoute
 }
@@ -71,6 +78,7 @@ export interface FileRoutesByTo {
   '/': typeof PublicIndexRoute
   '/auth': typeof PublicAuthLayoutRouteWithChildren
   '/home': typeof PrivateHomeIndexRoute
+  '/settings': typeof PrivateSettingsIndexRoute
   '/auth/login': typeof PublicAuthLayoutLoginRoute
   '/auth/register': typeof PublicAuthLayoutRegisterRoute
 }
@@ -82,14 +90,21 @@ export interface FileRoutesById {
   '/_public/auth': typeof PublicAuthRouteWithChildren
   '/_public/auth/_layout': typeof PublicAuthLayoutRouteWithChildren
   '/_private/home/': typeof PrivateHomeIndexRoute
+  '/_private/settings/': typeof PrivateSettingsIndexRoute
   '/_public/auth/_layout/login': typeof PublicAuthLayoutLoginRoute
   '/_public/auth/_layout/register': typeof PublicAuthLayoutRegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/home' | '/auth/login' | '/auth/register'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/home'
+    | '/settings'
+    | '/auth/login'
+    | '/auth/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/home' | '/auth/login' | '/auth/register'
+  to: '/' | '/auth' | '/home' | '/settings' | '/auth/login' | '/auth/register'
   id:
     | '__root__'
     | '/_private'
@@ -98,6 +113,7 @@ export interface FileRouteTypes {
     | '/_public/auth'
     | '/_public/auth/_layout'
     | '/_private/home/'
+    | '/_private/settings/'
     | '/_public/auth/_layout/login'
     | '/_public/auth/_layout/register'
   fileRoutesById: FileRoutesById
@@ -137,6 +153,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicIndexRouteImport
       parentRoute: typeof PublicRouteRoute
     }
+    '/_private/settings/': {
+      id: '/_private/settings/'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof PrivateSettingsIndexRouteImport
+      parentRoute: typeof PrivateRouteRoute
+    }
     '/_private/home/': {
       id: '/_private/home/'
       path: '/home'
@@ -170,10 +193,12 @@ declare module '@tanstack/react-router' {
 
 interface PrivateRouteRouteChildren {
   PrivateHomeIndexRoute: typeof PrivateHomeIndexRoute
+  PrivateSettingsIndexRoute: typeof PrivateSettingsIndexRoute
 }
 
 const PrivateRouteRouteChildren: PrivateRouteRouteChildren = {
   PrivateHomeIndexRoute: PrivateHomeIndexRoute,
+  PrivateSettingsIndexRoute: PrivateSettingsIndexRoute,
 }
 
 const PrivateRouteRouteWithChildren = PrivateRouteRoute._addFileChildren(

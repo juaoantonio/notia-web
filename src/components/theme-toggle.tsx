@@ -42,7 +42,7 @@ export function ThemeToggle() {
       size="icon"
       aria-label="Alternar tema"
       onClick={toggle}
-      className="rounded-full"
+      className="border-border border"
       title={theme === "dark" ? "Mudar para claro" : "Mudar para escuro"}
     >
       {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}

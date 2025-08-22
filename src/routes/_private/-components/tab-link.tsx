@@ -6,7 +6,7 @@ import type { TabItem } from "@/routes/_private/-components/types.ts";
 export function TabLink({ to, icon: Icon, label, disabled }: TabItem) {
   if (disabled) {
     return (
-      <div className="text-muted-foreground flex flex-col items-center justify-center gap-1 p-2 py-3 text-xs">
+      <div className="text-muted-foreground flex cursor-not-allowed flex-col items-center justify-center gap-1 p-2 py-3 text-xs">
         <Icon className="h-5 w-5" />
         <span>{label}</span>
       </div>
@@ -17,8 +17,8 @@ export function TabLink({ to, icon: Icon, label, disabled }: TabItem) {
       to={to}
       activeOptions={{ exact: true }}
       className="group flex flex-col items-center justify-center gap-1 p-2 py-3 text-xs"
-      activeProps={{ className: "text-foreground" }}
-      inactiveProps={{ className: "text-muted-foreground" }}
+      activeProps={{ className: "text-primary" }}
+      inactiveProps={{ className: "text-muted-foreground " }}
     >
       {({ isActive }) => (
         <>

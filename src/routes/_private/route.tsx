@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { Send, Settings, Wand2, Lock } from "lucide-react";
 
-import { ThemeToggle } from "@/components/theme-toggle.tsx";
 import { meQueryOptions } from "@/modules/auth/auth.queries.ts";
 import { TopAppBar } from "@/routes/_private/-components/app-top-bar.tsx";
 import { BottomTabs } from "@/routes/_private/-components/bottom-tabs.tsx";
@@ -30,10 +29,10 @@ export function PrivateLayout() {
   const { data: me } = useQuery(meQueryOptions);
 
   const tabs: TabItem[] = [
-    { to: "/_private/home", icon: Lock, label: "Meu cofre" },
-    { to: "/_private/send", icon: Send, label: "Enviar", disabled: true },
-    { to: "/_private/generator", icon: Wand2, label: "Gerador", disabled: true },
-    { to: "/_private/settings", icon: Settings, label: "Configurações", disabled: true },
+    { to: "/home", icon: Lock, label: "Meu cofre" },
+    { to: "/home", icon: Send, label: "Enviar", disabled: true },
+    { to: "/home", icon: Wand2, label: "Gerador", disabled: true },
+    { to: "/settings", icon: Settings, label: "Configurações" },
   ];
 
   return (
@@ -42,7 +41,6 @@ export function PrivateLayout() {
         title={me?.name ?? "My vault"}
         avatarUrl={me?.picture}
         avatarAlt={me?.name ?? "User"}
-        rightSlot={<ThemeToggle />}
       />
 
       <main className="mx-auto w-full max-w-screen-md flex-1 px-4 pt-4 pb-24">
