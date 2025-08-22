@@ -2,17 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 
 import { GoogleLoginButton } from "@/components/common/google-login-button.tsx";
-import { Separator } from "@/components/ui/separator.tsx";
+import { Separator } from "@/components/ui/separator";
 
-export const Route = createFileRoute("/(public)/auth/_layout/register")({
-  component: RegisterPage,
+export const Route = createFileRoute("/_public/auth/_layout/login")({
+  component: LoginPage,
   staticData: {
+    breadcrumb: "Login",
     navigable: true,
-    breadcrumb: "Cadastro",
   },
 });
 
-function RegisterPage() {
+function LoginPage() {
   return (
     <div className="flex w-full max-w-md flex-1 flex-col justify-center space-y-10">
       <motion.div
@@ -21,9 +21,9 @@ function RegisterPage() {
         animate={{ x: 0, opacity: 1 }} // vai para o lugar e aparece
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <h1 className="text-4xl font-semibold">Cadastro</h1>
+        <h1 className="text-4xl font-semibold">Login</h1>
         <p className="text-muted-foreground text-sm">
-          Cadastre-se para organizar seus links de estudo com o Notia.
+          Entre para organizar seus links de estudo com o Notia.
         </p>
       </motion.div>
 
@@ -43,10 +43,10 @@ function RegisterPage() {
         </div>
 
         <Link
-          to={"/auth/login"}
+          to={"/auth/register"}
           className="text-muted-foreground block text-center text-xs underline underline-offset-2"
         >
-          Faça login
+          Cadastre-se
         </Link>
       </motion.div>
     </div>

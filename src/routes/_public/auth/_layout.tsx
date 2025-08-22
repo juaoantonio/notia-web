@@ -3,10 +3,10 @@ import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { AnimatedBackground } from "@/components/common/animated-background.tsx";
 import { AutoBreadcrumb } from "@/components/common/auto-breadcrumb.tsx";
 import { useBreakpointValue } from "@/hooks/use-breakpoint-value.ts";
-import { AsideLogoPanel } from "@/routes/(public)/auth/-components/aside-logo-panel.tsx";
-import { bubblesBase, bubblesLg } from "@/routes/(public)/auth/-components/bubble-config.ts";
+import { AsideLogoPanel } from "@/routes/_public/auth/-components/aside-logo-panel.tsx";
+import { bubblesBase, bubblesLg } from "@/routes/_public/auth/-components/bubble-config.ts";
 
-export const Route = createFileRoute("/(public)/auth/_layout")({
+export const Route = createFileRoute("/_public/auth/_layout")({
   component: AuthLayout,
   staticData: {
     navigable: false,
