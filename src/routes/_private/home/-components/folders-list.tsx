@@ -2,6 +2,7 @@ import { FolderIcon, MoreVertical } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge.tsx";
 import { Card, CardContent } from "@/components/ui/card.tsx";
+import { cn } from "@/lib/utils.ts";
 import type { Folder } from "@/modules/home/home.types";
 
 import { AvatarSkeleton, LineSkeleton } from "./skeletons";
@@ -40,11 +41,13 @@ export function FoldersList({ folders, loading }: Props) {
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium">{f.name}</p>
+                      <div className={cn("flex items-center gap-2", f.isPublic && "mb-1.5")}>
+                        <p className="truncate text-sm font-medium">{f.name}</p>
+                        {f.isPublic && (
+                          <Badge className="h-5 rounded-full text-[10px]">Público</Badge>
+                        )}
+                      </div>
                       <p className="text-muted-foreground truncate text-xs">{f.description}</p>
-                      {f.isPublic && (
-                        <Badge className="mt-1 h-5 rounded-full text-[10px]">Public</Badge>
-                      )}
                     </div>
 
                     <div className="flex items-center gap-2">

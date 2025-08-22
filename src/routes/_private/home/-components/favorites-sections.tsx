@@ -36,7 +36,7 @@ export function FavoritesSection({ favorites, loading }: Props) {
                   <p className="truncate text-sm font-medium">{f.name}</p>
                   <p className="text-muted-foreground truncate text-xs">{f.description}</p>
                   <div className="mt-1 flex items-center gap-2">
-                    {f.isPublic && <Badge className="h-5 rounded-full text-[10px]">Public</Badge>}
+                    {f.isPublic && <Badge className="h-5 rounded-full text-[10px]">Público</Badge>}
                     <span className="text-muted-foreground text-xs">{f.linksCount} links</span>
                   </div>
                 </div>
