@@ -25,7 +25,7 @@ function HomePage() {
   const { data: recent, isLoading: loadingRecent } = useQuery(recentLinksQueryOptions);
 
   const favorites: Folder[] = useMemo(
-    () => (folders ?? []).filter((f) => f.favorite).slice(0, 3),
+    () => (folders ?? []).filter((f) => f.isFavorite).slice(0, 3),
     [folders],
   );
 

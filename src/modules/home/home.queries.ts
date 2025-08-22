@@ -13,7 +13,7 @@ async function fetchFoldersMock(): Promise<Folder[]> {
       description: "Estruturas de dados, grafos e programação competitiva",
       isPublic: false,
       linksCount: 42,
-      favorite: true,
+      isFavorite: true,
     },
     {
       id: "f-2",
@@ -21,6 +21,7 @@ async function fetchFoldersMock(): Promise<Folder[]> {
       description: "Plugins, patterns, auth, Prisma e Postgres",
       isPublic: false,
       linksCount: 31,
+      isFavorite: false,
     },
     {
       id: "f-3",
@@ -28,7 +29,7 @@ async function fetchFoldersMock(): Promise<Folder[]> {
       description: "Retrieval, chunking e avaliação",
       isPublic: true,
       linksCount: 18,
-      favorite: true,
+      isFavorite: true,
     },
     {
       id: "f-4",
@@ -36,6 +37,7 @@ async function fetchFoldersMock(): Promise<Folder[]> {
       description: "Microcopy, heurísticas e exemplos",
       isPublic: false,
       linksCount: 12,
+      isFavorite: false,
     },
   ];
 }
@@ -50,7 +52,7 @@ async function fetchRecentLinksMock(): Promise<LinkItem[]> {
       description: "Anotações sobre HTTP, sockets e Node",
       folderId: "f-2",
       createdAt: new Date().toISOString(),
-      favorite: true,
+      isFavorite: true,
     },
     {
       id: "l-2",
