@@ -33,17 +33,19 @@ export function NavHeader() {
           </a>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <Link
-            className="text-muted-foreground hover:text-foreground hidden text-sm md:inline"
-            to={"/auth/login"}
-          >
-            Entrar
-          </Link>
+        <div className={"flex items-center gap-10"}>
+          <div className="flex items-center gap-3">
+            <Link
+              className="text-muted-foreground hover:text-foreground hidden text-sm md:inline"
+              to={"/auth/login"}
+            >
+              Entrar
+            </Link>
+            <Button asChild className="px-5">
+              <Link to={"/auth/register"}>Criar Conta</Link>
+            </Button>
+          </div>
           <ThemeToggle />
-          <Button asChild className="px-5">
-            <Link to={"/auth/register"}>Criar Conta</Link>
-          </Button>
         </div>
       </div>
     </header>
