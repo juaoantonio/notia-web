@@ -63,7 +63,7 @@ export function FeaturesGrid() {
       >
         {items.map((f) => (
           <motion.div key={f.title} variants={fadeUp} transition={{ duration: 0.35 }}>
-            <Card className="shadow-sm transition-shadow hover:shadow-md">
+            <Card className="h-full shadow-sm transition-shadow hover:shadow-md">
               <CardContent className="p-6">
                 <div className="bg-primary/10 text-primary mb-4 inline-flex rounded-md p-3">
                   <f.icon className="size-6" />
