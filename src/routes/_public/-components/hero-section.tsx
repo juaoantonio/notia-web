@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
 import { SectionBadge } from "@/components/common/session-badge";
@@ -65,7 +66,9 @@ export function HeroSection() {
           </p>
           <div className="flex flex-col items-start gap-3 sm:flex-row">
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button className="px-6">Começar grátis</Button>
+              <Button className="px-6" asChild>
+                <Link to={"/auth/register"}>Começar grátis</Link>
+              </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button variant="outline" className="px-6" asChild>
@@ -121,7 +124,9 @@ export function HeroSection() {
               <TagRotator sets={tagSets} />
             </CardContent>
             <CardFooter className="justify-end">
-              <Button className="px-6">Salvar link</Button>
+              <Button className="px-6" asChild>
+                <Link to={"/auth/register"}>Salvar link</Link>
+              </Button>
             </CardFooter>
             <div
               aria-hidden

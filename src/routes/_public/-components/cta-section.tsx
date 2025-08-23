@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,9 @@ export function CtaSection() {
           <p className="text-muted-foreground mt-2">Comece grátis hoje. Leva menos de 1 minuto.</p>
         </div>
         <div className="flex justify-start md:justify-end">
-          <Button className="px-6">Criar conta</Button>
+          <Button className="px-6" asChild>
+            <Link to={"/auth/register"}>Criar conta</Link>
+          </Button>
         </div>
       </div>
     </motion.section>
