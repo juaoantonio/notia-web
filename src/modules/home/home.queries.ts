@@ -1,45 +1,14 @@
 import { queryOptions } from "@tanstack/react-query";
 
+import { api } from "@/lib/api.ts";
+
 import type { Folder, LinkItem } from "./home.types";
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function fetchFoldersMock(): Promise<Folder[]> {
-  await delay(550);
-  return [
-    {
-      id: "f-1",
-      name: "Algoritmos",
-      description: "Estruturas de dados, grafos e programação competitiva",
-      isPublic: false,
-      linksCount: 42,
-      isFavorite: true,
-    },
-    {
-      id: "f-2",
-      name: "Backend • Fastify",
-      description: "Plugins, patterns, auth, Prisma e Postgres",
-      isPublic: false,
-      linksCount: 31,
-      isFavorite: false,
-    },
-    {
-      id: "f-3",
-      name: "IA & Embeddings",
-      description: "Retrieval, chunking e avaliação",
-      isPublic: true,
-      linksCount: 18,
-      isFavorite: true,
-    },
-    {
-      id: "f-4",
-      name: "UX Writing",
-      description: "Microcopy, heurísticas e exemplos",
-      isPublic: false,
-      linksCount: 12,
-      isFavorite: false,
-    },
-  ];
+async function fetchFolders() {
+  const response = await api.get<Folder[]>("/folders");
+  return response.data;
 }
 
 async function fetchRecentLinksMock(): Promise<LinkItem[]> {
@@ -90,9 +59,8 @@ async function fetchRecentLinksMock(): Promise<LinkItem[]> {
 }
 
 export const foldersQueryOptions = queryOptions({
-  queryKey: ["folders", "mock", { limit: 6 }],
-  queryFn: fetchFoldersMock,
-  staleTime: 20_000,
+  queryKey: ["folders"],
+  queryFn: fetchFolders,
 });
 
 export const recentLinksQueryOptions = queryOptions({

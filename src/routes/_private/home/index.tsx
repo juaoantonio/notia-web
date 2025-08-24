@@ -10,7 +10,6 @@ import { FavoritesSection } from "@/routes/_private/home/-components/favorites-s
 import { FoldersList } from "@/routes/_private/home/-components/folders-list.tsx";
 import { RecentLinksList } from "@/routes/_private/home/-components/recent-links-list.tsx";
 import { SearchBar } from "@/routes/_private/home/-components/search-bar.tsx";
-import { SummaryCards } from "@/routes/_private/home/-components/summary-cards.tsx";
 
 export const Route = createFileRoute("/_private/home/")({
   component: HomePage,
@@ -34,10 +33,7 @@ function HomePage() {
       <SearchBar />
       <FavoritesSection favorites={favorites} loading={loadingFolders} />
       <FoldersList folders={folders ?? []} loading={loadingFolders} />
-      <SummaryCards
-        linksCount={(recent ?? []).length}
-        publicFoldersCount={(folders ?? []).filter((f) => f.isPublic).length}
-      />
+
       <RecentLinksList recent={recent ?? []} loading={loadingRecent} />
 
       <Separator className="my-6" />

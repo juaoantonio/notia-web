@@ -5,6 +5,13 @@ export type Folder = {
   isPublic: boolean;
   linksCount: number;
   isFavorite: boolean;
+  publicSlug: PublicSlug | null;
+};
+
+export type PublicSlug = {
+  slug: string;
+  active: boolean;
+  revokedAt: string | null;
 };
 
 export type LinkItem = {
