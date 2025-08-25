@@ -1,8 +1,10 @@
+import { useEffect } from "react";
+
 import { useQuery } from "@tanstack/react-query";
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect, useNavigate } from "@tanstack/react-router";
 import { Send, Settings, Wand2, Lock } from "lucide-react";
 
-import { meQueryOptions } from "@/modules/auth/auth.queries.ts";
+import { meQueryOptions, useAuth } from "@/modules/auth/auth.queries.ts";
 import { TopAppBar } from "@/routes/_private/-components/app-top-bar.tsx";
 import { BottomTabs } from "@/routes/_private/-components/bottom-tabs.tsx";
 import { FabCreate } from "@/routes/_private/-components/fab-create.tsx";
@@ -27,6 +29,8 @@ export const Route = createFileRoute("/_private")({
 
 export function PrivateLayout() {
   const { data: me } = useQuery(meQueryOptions);
+  const { isAuthenticated, isLoading } = useAuth();
+  const navigate = useNavigate();
 
   const tabs: TabItem[] = [
     { to: "/home", icon: Lock, label: "Meu cofre" },
@@ -34,6 +38,15 @@ export function PrivateLayout() {
     { to: "/home", icon: Wand2, label: "Gerador", disabled: true },
     { to: "/settings", icon: Settings, label: "Configurações" },
   ];
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      navigate({
+        to: "/auth/login",
+        replace: true,
+      });
+    }
+  }, [isLoading, isAuthenticated, navigate]);
 
   return (
     <div className="bg-background text-foreground relative flex min-h-dvh flex-col">
