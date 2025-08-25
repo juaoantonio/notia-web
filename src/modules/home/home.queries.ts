@@ -1,13 +1,14 @@
 import { queryOptions } from "@tanstack/react-query";
 
 import { api } from "@/lib/api.ts";
+import type { PaginatedResponse } from "@/modules/common/types/pagination.ts";
 
 import type { Folder, LinkItem } from "./home.types";
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 async function fetchFolders() {
-  const response = await api.get<Folder[]>("/folders");
+  const response = await api.get<PaginatedResponse<Folder>>("/folders");
   return response.data;
 }
 

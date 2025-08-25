@@ -20,19 +20,19 @@ export const Route = createFileRoute("/_private/home/")({
 });
 
 function HomePage() {
-  const { data: folders, isLoading: loadingFolders } = useQuery(foldersQueryOptions);
+  const { data: paginatedData, isLoading: loadingFolders } = useQuery(foldersQueryOptions);
   const { data: recent, isLoading: loadingRecent } = useQuery(recentLinksQueryOptions);
 
   const favorites: Folder[] = useMemo(
-    () => (folders ?? []).filter((f) => f.isFavorite).slice(0, 3),
-    [folders],
+    () => (paginatedData?.data ?? []).filter((f) => f.isFavorite),
+    [paginatedData],
   );
 
   return (
     <div className="space-y-5">
       <SearchBar />
       <FavoritesSection favorites={favorites} loading={loadingFolders} />
-      <FoldersList folders={folders ?? []} loading={loadingFolders} />
+      <FoldersList folders={paginatedData?.data ?? []} loading={loadingFolders} />
 
       <RecentLinksList recent={recent ?? []} loading={loadingRecent} />
 
