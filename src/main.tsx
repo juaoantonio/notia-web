@@ -8,7 +8,7 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals.ts";
 import { routeTree } from "./routeTree.gen";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 // Create a new router instance
 const router = createRouter({
