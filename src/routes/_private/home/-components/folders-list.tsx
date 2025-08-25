@@ -1,26 +1,33 @@
+import { useQuery } from "@tanstack/react-query";
 import { FolderIcon, MoreVertical } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge.tsx";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import { cn } from "@/lib/utils.ts";
-import type { Folder } from "@/modules/home/home.types";
+import { paginatedFoldersQueryOptions } from "@/modules/home/home.queries.ts";
 
 import { AvatarSkeleton, LineSkeleton } from "./skeletons";
 
-type Props = { folders: Folder[]; loading: boolean };
+export function FoldersList() {
+  const { data: paginatedFolders, isPending, error } = useQuery(paginatedFoldersQueryOptions);
 
-export function FoldersList({ folders, loading }: Props) {
+  if (error) {
+    return null;
+  }
+
   return (
     <section className="space-y-2">
       <div className="flex items-center justify-between">
         <h2 className="text-muted-foreground text-sm font-medium">Minhas Pastas</h2>
-        {!loading && <span className="text-muted-foreground text-xs">{folders.length}</span>}
+        <span className="text-muted-foreground text-xs">
+          {isPending ? 0 : paginatedFolders.meta.count}
+        </span>
       </div>
 
       <Card className="overflow-hidden">
         <CardContent className="p-0">
           <ul className="divide-border divide-y">
-            {loading &&
+            {isPending &&
               Array.from({ length: 4 }).map((_, i) => (
                 <li key={i} className="flex items-center gap-3 px-4 py-3">
                   <AvatarSkeleton />
@@ -32,9 +39,9 @@ export function FoldersList({ folders, loading }: Props) {
                 </li>
               ))}
 
-            {!loading &&
-              (folders.length ? (
-                folders.map((f) => (
+            {!isPending &&
+              (paginatedFolders.data.length ? (
+                paginatedFolders.data.map((f) => (
                   <li key={f.id} className="flex items-center gap-3 px-4 py-3">
                     <div className="bg-muted text-muted-foreground grid h-8 w-8 place-items-center rounded-md">
                       <FolderIcon className="h-4 w-4" />
@@ -64,7 +71,7 @@ export function FoldersList({ folders, loading }: Props) {
                 ))
               ) : (
                 <li className="text-muted-foreground px-4 py-6 text-sm">
-                  No folders yet. Create your first one with the + button.
+                  Nenhuma pasta ainda. Crie sua primeira com o botão +.
                 </li>
               ))}
           </ul>

@@ -7,8 +7,17 @@ import type { Folder, LinkItem } from "./home.types";
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function fetchFolders() {
+async function fetchPaginatedFolders() {
   const response = await api.get<PaginatedResponse<Folder>>("/folders");
+  return response.data;
+}
+
+async function fetchPaginatedFavoriteFolders() {
+  const response = await api.get<PaginatedResponse<Folder>>("/folders", {
+    params: {
+      isFavorite: true,
+    },
+  });
   return response.data;
 }
 
@@ -59,9 +68,19 @@ async function fetchRecentLinksMock(): Promise<LinkItem[]> {
   ];
 }
 
-export const foldersQueryOptions = queryOptions({
+export const paginatedFoldersQueryOptions = queryOptions({
   queryKey: ["folders"],
-  queryFn: fetchFolders,
+  queryFn: fetchPaginatedFolders,
+});
+
+export const paginatedFavoriteFoldersQueryOptions = queryOptions({
+  queryKey: [
+    "folders",
+    {
+      isFavorite: true,
+    },
+  ],
+  queryFn: fetchPaginatedFavoriteFolders,
 });
 
 export const recentLinksQueryOptions = queryOptions({

@@ -1,21 +1,33 @@
+import { useQuery } from "@tanstack/react-query";
 import { ChevronRight, Star } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge.tsx";
 import { Card, CardContent } from "@/components/ui/card.tsx";
-import type { Folder } from "@/modules/home/home.types";
+import { paginatedFavoriteFoldersQueryOptions } from "@/modules/home/home.queries.ts";
 
-type Props = { favorites: Folder[]; loading: boolean };
+export function FavoritesFoldersSection() {
+  const {
+    data: paginatedFavoriteFolders,
+    isPending,
+    error,
+  } = useQuery(paginatedFavoriteFoldersQueryOptions);
 
-export function FavoritesSection({ favorites, loading }: Props) {
+  if (error) {
+    return;
+  }
+
   return (
     <section className="space-y-2">
       <div className="flex items-center justify-between">
         <h2 className="text-muted-foreground text-sm font-medium">Meus Favoritos</h2>
-        <span className="text-muted-foreground text-xs">{favorites.length}</span>
+
+        <span className="text-muted-foreground text-xs">
+          {isPending ? 0 : paginatedFavoriteFolders.meta.count}
+        </span>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {loading &&
+        {isPending &&
           Array.from({ length: 2 }).map((_, i) => (
             <Card key={i} className="animate-pulse">
               <CardContent className="p-4">
@@ -25,8 +37,8 @@ export function FavoritesSection({ favorites, loading }: Props) {
             </Card>
           ))}
 
-        {!loading &&
-          favorites.map((f) => (
+        {!isPending &&
+          paginatedFavoriteFolders.data.map((f) => (
             <Card key={f.id} className="shadow-sm transition-shadow hover:shadow-md">
               <CardContent className="flex items-start gap-3 p-4">
                 <div className="bg-primary/10 text-primary grid size-9 place-items-center rounded-lg">
@@ -45,7 +57,7 @@ export function FavoritesSection({ favorites, loading }: Props) {
             </Card>
           ))}
 
-        {!loading && !favorites.length && (
+        {!isPending && !paginatedFavoriteFolders.data.length && (
           <Card>
             <CardContent className="text-muted-foreground p-4 text-sm">
               Mark folders as favorite to see them here.
