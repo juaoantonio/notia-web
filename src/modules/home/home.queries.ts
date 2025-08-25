@@ -3,15 +3,15 @@ import { queryOptions } from "@tanstack/react-query";
 import { api } from "@/lib/api.ts";
 import type { PaginatedResponse } from "@/modules/common/types/pagination.ts";
 
-import type { Folder, LinkItem } from "./home.types";
+import type { FolderListItem, Link } from "./home.types";
 
 async function fetchPaginatedFolders() {
-  const response = await api.get<PaginatedResponse<Folder>>("/folders");
+  const response = await api.get<PaginatedResponse<FolderListItem>>("/folders");
   return response.data;
 }
 
 async function fetchPaginatedFavoriteFolders() {
-  const response = await api.get<PaginatedResponse<Folder>>("/folders", {
+  const response = await api.get<PaginatedResponse<FolderListItem>>("/folders", {
     params: {
       isFavorite: true,
     },
@@ -20,7 +20,7 @@ async function fetchPaginatedFavoriteFolders() {
 }
 
 async function fetchPaginatedRecentLinks() {
-  const response = await api.get<PaginatedResponse<LinkItem>>("/links");
+  const response = await api.get<PaginatedResponse<Link>>("/links");
   return response.data;
 }
 

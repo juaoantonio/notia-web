@@ -1,11 +1,18 @@
-export type Folder = {
+export type BaseFolder = {
   id: string;
   name: string;
   description: string;
   isPublic: boolean;
-  linksCount: number;
   isFavorite: boolean;
   publicSlug: PublicSlug | null;
+};
+
+export type FolderListItem = BaseFolder & {
+  linksCount: number;
+};
+
+export type FolderDetail = BaseFolder & {
+  links: Link[];
 };
 
 export type PublicSlug = {
@@ -14,12 +21,29 @@ export type PublicSlug = {
   revokedAt: string | null;
 };
 
-export type LinkItem = {
+export type Link = {
   id: string;
-  url: string;
+  image: string | null;
   title: string;
-  description: string;
+  url: string;
+  favicon: string | null;
+  siteName: string | null;
+  tags: LinkTag[];
+  description: string | null;
   folderId: string;
-  createdAt: string;
-  isFavorite?: boolean;
+};
+
+export enum TagSource {
+  MANUAL = "MANUAL",
+  AI = "AI",
+}
+
+export type Tag = {
+  id: string;
+  name: string;
+};
+
+export type LinkTag = {
+  tag: Tag;
+  source: TagSource;
 };
