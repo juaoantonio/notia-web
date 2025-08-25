@@ -55,6 +55,6 @@ export function useLogoutMutation() {
 }
 
 export function useAuth() {
-  const { data, isLoading, error } = useMeQuery();
-  return { user: data, isAuthenticated: !!data, isLoading, error };
+  const { data, isPending, error } = useMeQuery();
+  return { user: data, isAuthenticated: !!data, isPending, error };
 }

@@ -29,7 +29,7 @@ export const Route = createFileRoute("/_private")({
 
 export function PrivateLayout() {
   const { data: me } = useQuery(meQueryOptions);
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isPending } = useAuth();
   const navigate = useNavigate();
 
   const tabs: TabItem[] = [
@@ -40,13 +40,13 @@ export function PrivateLayout() {
   ];
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (!isPending && !isAuthenticated) {
       navigate({
         to: "/auth/login",
         replace: true,
       });
     }
-  }, [isLoading, isAuthenticated, navigate]);
+  }, [isPending, isAuthenticated, navigate]);
 
   return (
     <div className="bg-background text-foreground relative flex min-h-dvh flex-col">
