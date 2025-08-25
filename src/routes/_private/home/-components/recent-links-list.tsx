@@ -12,7 +12,7 @@ export function RecentLinksList({ recent, loading }: Props) {
   return (
     <section className="space-y-2">
       <div className="flex items-center justify-between">
-        <h2 className="text-muted-foreground text-sm font-medium">Recentes</h2>
+        <h2 className="text-muted-foreground text-sm font-medium">Links Recentes</h2>
         {!loading && <span className="text-muted-foreground text-xs">{recent.length}</span>}
       </div>
 
