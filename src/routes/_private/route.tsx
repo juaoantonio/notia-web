@@ -60,7 +60,10 @@ export function PrivateLayout() {
         <Outlet />
       </main>
 
-      <FabCreate />
+      <FabCreate
+        onCreateFolder={() => navigate({ to: "/folders/new" })}
+        onCreateLink={() => navigate({ to: "/folders/new" })}
+      />
       <BottomTabs items={tabs} />
     </div>
   );
