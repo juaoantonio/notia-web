@@ -1,25 +1,36 @@
+import { useQuery } from "@tanstack/react-query";
 import { Globe, Link2, MoreVertical } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card.tsx";
-import type { LinkItem } from "@/modules/home/home.types";
+import { paginatedRecentLinksQueryOptions } from "@/modules/home/home.queries.ts";
 import { faviconLetter, hostnameOf } from "@/modules/home/home.utils";
 
 import { AvatarSkeleton, LineSkeleton } from "./skeletons";
 
-type Props = { recent: LinkItem[]; loading: boolean };
+export function RecentLinksList() {
+  const {
+    data: paginatedRecentLinks,
+    isPending,
+    error,
+  } = useQuery(paginatedRecentLinksQueryOptions);
 
-export function RecentLinksList({ recent, loading }: Props) {
+  if (error) {
+    return null;
+  }
+
   return (
     <section className="space-y-2">
       <div className="flex items-center justify-between">
         <h2 className="text-muted-foreground text-sm font-medium">Links Recentes</h2>
-        {!loading && <span className="text-muted-foreground text-xs">{recent.length}</span>}
+        {!isPending && (
+          <span className="text-muted-foreground text-xs">{paginatedRecentLinks.meta.count}</span>
+        )}
       </div>
 
       <Card className="overflow-hidden">
         <CardContent className="p-0">
           <ul className="divide-border divide-y">
-            {loading &&
+            {isPending &&
               Array.from({ length: 6 }).map((_, i) => (
                 <li key={i} className="flex items-center gap-3 px-4 py-3">
                   <AvatarSkeleton />
@@ -31,9 +42,9 @@ export function RecentLinksList({ recent, loading }: Props) {
                 </li>
               ))}
 
-            {!loading &&
-              (recent.length ? (
-                recent.map((lnk) => (
+            {!isPending &&
+              (paginatedRecentLinks.meta.count ? (
+                paginatedRecentLinks.data.map((lnk) => (
                   <li key={lnk.id} className="flex items-center gap-3 px-4 py-3">
                     <div className="bg-primary/10 text-primary grid h-8 w-8 flex-none place-items-center rounded-md">
                       <span className="text-sm font-medium">{faviconLetter(lnk.url)}</span>
@@ -59,7 +70,7 @@ export function RecentLinksList({ recent, loading }: Props) {
                 ))
               ) : (
                 <li className="text-muted-foreground px-4 py-6 text-sm">
-                  Recently added links will appear here.
+                  Links recentes aparecerão aqui.
                 </li>
               ))}
           </ul>
