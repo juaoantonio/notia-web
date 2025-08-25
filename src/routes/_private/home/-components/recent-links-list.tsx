@@ -28,7 +28,7 @@ export function RecentLinksList() {
         )}
       </div>
 
-      <Card className="overflow-hidden">
+      <Card className="overflow-hidden py-1">
         <CardContent className="p-0">
           <ul className="divide-border divide-y">
             {isPending &&

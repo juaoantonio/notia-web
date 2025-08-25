@@ -39,7 +39,7 @@ export function FavoritesFoldersSection() {
 
         {!isPending &&
           paginatedFavoriteFolders.data.map((f) => (
-            <Card key={f.id} className="shadow-sm transition-shadow hover:shadow-md">
+            <Card key={f.id} className="py-1 shadow-sm transition-shadow hover:shadow-md">
               <CardContent className="flex items-start gap-3 p-4">
                 <div className="bg-primary/10 text-primary grid size-9 place-items-center rounded-lg">
                   <Star className="h-4 w-4" />
